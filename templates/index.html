@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pavan Kumar | Portfolio</title>
+  <meta name="description" content="Pavan Kumar's professional portfolio — Python, web development and data analytics.">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header class="navbar">
+  <a class="brand" href="#home">P<span>.</span>K</a>
+  <button class="menu-btn" aria-label="Open menu">☰</button>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#education">Education</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<main>
+<section id="home" class="hero">
+  <div class="hero-copy">
+    <p class="eyebrow">HELLO, I'M</p>
+    <h1>Pavan <span>Kumar</span></h1>
+    <h2>Python Developer &amp; Aspiring Data Analyst</h2>
+    <p class="lead">I build practical software projects and enjoy turning data and ideas into useful, clean digital experiences.</p>
+    <div class="actions">
+      <a class="btn primary" href="#projects">View My Work</a>
+      <a class="btn secondary" href="#contact">Contact Me</a>
+    </div>
+  </div>
+  <div class="hero-card">
+    <div class="orb">PK</div>
+    <div class="code-card">
+      <span>python</span>
+      <pre>def build_future():
+    skills = ["Python", "SQL",
+              "Web", "Analytics"]
+    return skills</pre>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="section">
+  <div class="section-head"><p class="eyebrow">ABOUT ME</p><h2>A developer who loves <span>building.</span></h2></div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I am Pavan Kumar, an Information Technology graduate interested in Python development, web development, databases and data analytics.</p>
+      <p>I enjoy learning new technologies, solving technical problems and creating projects that demonstrate practical skills.</p>
+    </div>
+    <div class="stats">
+      <div><strong>Python</strong><small>Programming</small></div>
+      <div><strong>SQL</strong><small>Databases</small></div>
+      <div><strong>Web</strong><small>Development</small></div>
+      <div><strong>Data</strong><small>Analytics</small></div>
+    </div>
+  </div>
+</section>
+
+<section id="skills" class="section alt">
+  <div class="section-head"><p class="eyebrow">MY TOOLKIT</p><h2>Skills &amp; <span>Technologies</span></h2></div>
+  <div class="skills-grid">
+    <div class="skill"><b>Python</b><div class="bar"><i style="width:90%"></i></div><small>Programming &amp; automation</small></div>
+    <div class="skill"><b>SQL</b><div class="bar"><i style="width:82%"></i></div><small>Queries &amp; databases</small></div>
+    <div class="skill"><b>HTML / CSS</b><div class="bar"><i style="width:88%"></i></div><small>Responsive websites</small></div>
+    <div class="skill"><b>Data Analysis</b><div class="bar"><i style="width:78%"></i></div><small>Insights &amp; reporting</small></div>
+    <div class="skill"><b>Git / GitHub</b><div class="bar"><i style="width:75%"></i></div><small>Version control</small></div>
+    <div class="skill"><b>Flask</b><div class="bar"><i style="width:70%"></i></div><small>Python web apps</small></div>
+  </div>
+</section>
+
+<section id="projects" class="section">
+  <div class="section-head"><p class="eyebrow">SELECTED WORK</p><h2>My <span>Projects</span></h2></div>
+  <div class="projects">
+    <article class="project">
+      <div class="project-icon">01</div><p class="tag">PYTHON • HEALTHCARE</p>
+      <h3>Heart Disease Tracking System</h3>
+      <p>A Python-based application concept for storing and tracking heart-health related data using a database backend.</p>
+      <div class="chips"><span>Python</span><span>SQL</span><span>PostgreSQL</span></div>
+    </article>
+    <article class="project">
+      <div class="project-icon">02</div><p class="tag">AI • MULTIMODAL</p>
+      <h3>Multi-Modal Emotion Recognition</h3>
+      <p>A project combining visual, acoustic and textual information to recognize emotions using machine learning techniques.</p>
+      <div class="chips"><span>CNN</span><span>BERT</span><span>Librosa</span><span>PyTorch</span></div>
+    </article>
+    <article class="project">
+      <div class="project-icon">03</div><p class="tag">WEB • PYTHON</p>
+      <h3>Personal Portfolio</h3>
+      <p>A responsive portfolio built with HTML/CSS and powered by a lightweight Flask backend.</p>
+      <div class="chips"><span>Flask</span><span>HTML</span><span>CSS</span></div>
+    </article>
+  </div>
+</section>
+
+<section id="education" class="section alt">
+  <div class="section-head"><p class="eyebrow">EDUCATION</p><h2>My <span>Journey</span></h2></div>
+  <div class="timeline">
+    <div class="timeline-item"><span>2026</span><div><h3>B.Tech — Information Technology</h3><p>NRI Institute of Technology, Visadala, Guntur</p><small>GPA: 70.63</small></div></div>
+    <div class="timeline-item"><span>2021</span><div><h3>Intermediate — MPC</h3><p>Subham Junior College, Guntur</p><small>GPA: 8.5</small></div></div>
+    <div class="timeline-item"><span>2020</span><div><h3>SSC</h3><p>St Mary's EM School, Markapuram</p><small>GPA: 9.5</small></div></div>
+  </div>
+</section>
+
+<section id="contact" class="section contact">
+  <div class="section-head"><p class="eyebrow">GET IN TOUCH</p><h2>Let's build something <span>great.</span></h2></div>
+  {% if message %}<div class="notice">{{ message }}</div>{% endif %}
+  <div class="contact-grid">
+    <div>
+      <h3>Have an opportunity?</h3>
+      <p>I'm open to entry-level opportunities, internships and projects related to Python, web development and data analytics.</p>
+      <div class="contact-line"><b>✉</b> Available through the contact form</div>
+      <div class="contact-line"><b>⌁</b> Guntur, India</div>
+    </div>
+    <form method="POST">
+      <input name="name" placeholder="Your name" required>
+      <input type="email" name="email" placeholder="Email address" required>
+      <textarea name="message" rows="6" placeholder="Your message" required></textarea>
+      <button class="btn primary" type="submit">Send Message →</button>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer><p>© 2026 Pavan Kumar. Built with Python + Flask.</p><a href="#home">Back to top ↑</a></footer>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
