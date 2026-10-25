@@ -64,51 +64,48 @@
 <section id="skills" class="section alt">
   <div class="section-head"><p class="eyebrow">MY TOOLKIT</p><h2>Skills &amp; <span>Technologies</span></h2></div>
   <div class="skills-grid">
-    <div class="skill"><b>Python</b><div class="bar"><i style="width:90%"></i></div><small>Programming &amp; automation</small></div>
-    <div class="skill"><b>SQL</b><div class="bar"><i style="width:82%"></i></div><small>Queries &amp; databases</small></div>
-    <div class="skill"><b>HTML / CSS</b><div class="bar"><i style="width:88%"></i></div><small>Responsive websites</small></div>
-    <div class="skill"><b>Data Analysis</b><div class="bar"><i style="width:78%"></i></div><small>Insights &amp; reporting</small></div>
-    <div class="skill"><b>Git / GitHub</b><div class="bar"><i style="width:75%"></i></div><small>Version control</small></div>
-    <div class="skill"><b>Flask</b><div class="bar"><i style="width:70%"></i></div><small>Python web apps</small></div>
+    {% for sk in skills %}
+    <div class="skill"><b>{{ sk.name }}</b><div class="bar"><i style="width:{{ sk.level }}%"></i></div><small>{{ sk.description }}</small></div>
+    {% endfor %}
   </div>
 </section>
 
 <section id="projects" class="section">
   <div class="section-head"><p class="eyebrow">SELECTED WORK</p><h2>My <span>Projects</span></h2></div>
   <div class="projects">
+    {% for p in projects %}
     <article class="project">
-      <div class="project-icon">01</div><p class="tag">PYTHON • HEALTHCARE</p>
-      <h3>Heart Disease Tracking System</h3>
-      <p>A Python-based application concept for storing and tracking heart-health related data using a database backend.</p>
-      <div class="chips"><span>Python</span><span>SQL</span><span>PostgreSQL</span></div>
+      <div class="project-icon">{{ '%02d' % loop.index }}</div><p class="tag">{{ p.tag }}</p>
+      <h3>{{ p.title }}</h3>
+      <p>{{ p.description }}</p>
+      <div class="chips">{% for t in p.tech %}<span>{{ t }}</span>{% endfor %}</div>
+      {% if p.github_url or p.live_url %}
+      <div class="project-links">
+        {% if p.github_url %}<a href="{{ p.github_url }}" target="_blank" rel="noopener">GitHub ↗</a>{% endif %}
+        {% if p.live_url %}<a href="{{ p.live_url }}" target="_blank" rel="noopener">Live ↗</a>{% endif %}
+      </div>
+      {% endif %}
     </article>
-    <article class="project">
-      <div class="project-icon">02</div><p class="tag">AI • MULTIMODAL</p>
-      <h3>Multi-Modal Emotion Recognition</h3>
-      <p>A project combining visual, acoustic and textual information to recognize emotions using machine learning techniques.</p>
-      <div class="chips"><span>CNN</span><span>BERT</span><span>Librosa</span><span>PyTorch</span></div>
-    </article>
-    <article class="project">
-      <div class="project-icon">03</div><p class="tag">WEB • PYTHON</p>
-      <h3>Personal Portfolio</h3>
-      <p>A responsive portfolio built with HTML/CSS and powered by a lightweight Flask backend.</p>
-      <div class="chips"><span>Flask</span><span>HTML</span><span>CSS</span></div>
-    </article>
+    {% else %}
+    <p class="empty">Projects coming soon.</p>
+    {% endfor %}
   </div>
 </section>
 
 <section id="education" class="section alt">
   <div class="section-head"><p class="eyebrow">EDUCATION</p><h2>My <span>Journey</span></h2></div>
   <div class="timeline">
-    <div class="timeline-item"><span>2026</span><div><h3>B.Tech — Information Technology</h3><p>NRI Institute of Technology, Visadala, Guntur</p><small>GPA: 70.63</small></div></div>
-    <div class="timeline-item"><span>2021</span><div><h3>Intermediate — MPC</h3><p>Subham Junior College, Guntur</p><small>GPA: 8.5</small></div></div>
-    <div class="timeline-item"><span>2020</span><div><h3>SSC</h3><p>St Mary's EM School, Markapuram</p><small>GPA: 9.5</small></div></div>
+    {% for e in education %}
+    <div class="timeline-item"><span>{{ e.year }}</span><div><h3>{{ e.title }}</h3><p>{{ e.institution }}</p><small>{{ e.grade }}</small></div></div>
+    {% endfor %}
   </div>
 </section>
 
 <section id="contact" class="section contact">
   <div class="section-head"><p class="eyebrow">GET IN TOUCH</p><h2>Let's build something <span>great.</span></h2></div>
-  {% if message %}<div class="notice">{{ message }}</div>{% endif %}
+  {% with msgs = get_flashed_messages(with_categories=true) %}
+    {% for cat, text in msgs %}<div class="notice {{ cat }}" role="status">{{ text }}</div>{% endfor %}
+  {% endwith %}
   <div class="contact-grid">
     <div>
       <h3>Have an opportunity?</h3>
@@ -116,10 +113,12 @@
       <div class="contact-line"><b>✉</b> Available through the contact form</div>
       <div class="contact-line"><b>⌁</b> Guntur, India</div>
     </div>
-    <form method="POST">
-      <input name="name" placeholder="Your name" required>
-      <input type="email" name="email" placeholder="Email address" required>
-      <textarea name="message" rows="6" placeholder="Your message" required></textarea>
+    <form method="POST" action="{{ url_for('contact') }}" id="contact-form" novalidate>
+      <input type="text" name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <input name="name" placeholder="Your name" maxlength="100" required>
+      <input type="email" name="email" placeholder="Email address" maxlength="254" required>
+      <textarea name="message" rows="6" placeholder="Your message (at least 10 characters)" minlength="10" maxlength="2000" required></textarea>
+      <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
       <button class="btn primary" type="submit">Send Message →</button>
     </form>
   </div>

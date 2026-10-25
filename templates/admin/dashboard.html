@@ -1,0 +1,40 @@
+{% extends "admin/base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<section id="messages">
+  <h1>Messages <span class="badge">{{ unread }} unread</span></h1>
+  {% for m in messages %}
+  <article class="card {{ '' if m.is_read else 'unread' }}">
+    <div class="card-head"><b>{{ m.name }}</b>
+      <a href="mailto:{{ m.email }}">{{ m.email }}</a><small>{{ m.created_at }} UTC</small></div>
+    <p>{{ m.message }}</p>
+    <div class="row">
+      <form method="POST" action="{{ url_for('admin_message_action', mid=m.id, action='unread' if m.is_read else 'read') }}" class="inline">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button class="btn">Mark {{ 'unread' if m.is_read else 'read' }}</button></form>
+      <form method="POST" action="{{ url_for('admin_message_action', mid=m.id, action='delete') }}" class="inline"
+            onsubmit="return confirm('Delete this message?')">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button class="btn danger">Delete</button></form>
+    </div>
+  </article>
+  {% else %}<p class="empty">No messages yet.</p>{% endfor %}
+</section>
+
+<section id="projects">
+  <h1>Projects <a class="btn primary" href="{{ url_for('admin_project_new') }}">+ New</a></h1>
+  {% for p in projects %}
+  <article class="card">
+    <div class="card-head"><b>{{ p.title }}</b><small>#{{ p.position }} · {{ 'visible' if p.visible else 'hidden' }}</small></div>
+    <p>{{ p.description }}</p>
+    <div class="row">
+      <a class="btn" href="{{ url_for('admin_project_edit', pid=p.id) }}">Edit</a>
+      <form method="POST" action="{{ url_for('admin_project_delete', pid=p.id) }}" class="inline"
+            onsubmit="return confirm('Delete this project?')">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button class="btn danger">Delete</button></form>
+    </div>
+  </article>
+  {% endfor %}
+</section>
+{% endblock %}

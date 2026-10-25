@@ -1,0 +1,18 @@
+{% extends "admin/base.html" %}
+{% block title %}{{ 'Edit' if editing else 'New' }} project{% endblock %}
+{% block content %}
+<h1>{{ 'Edit' if editing else 'New' }} project</h1>
+<form method="POST" class="narrow">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <label>Title<input name="title" value="{{ project.title or '' }}" required maxlength="120"></label>
+  <label>Tag (e.g. PYTHON • HEALTHCARE)<input name="tag" value="{{ project.tag or '' }}" maxlength="60"></label>
+  <label>Description<textarea name="description" rows="4" maxlength="600">{{ project.description or '' }}</textarea></label>
+  <label>Tech (comma separated)<input name="tech" value="{{ project.tech if project.tech is string else '' }}"></label>
+  <label>GitHub URL<input name="github_url" value="{{ project.github_url or '' }}" placeholder="https://github.com/..."></label>
+  <label>Live URL<input name="live_url" value="{{ project.live_url or '' }}" placeholder="https://..."></label>
+  <label>Order<input type="number" name="position" value="{{ project.position or 0 }}"></label>
+  <label class="check"><input type="checkbox" name="visible" {{ 'checked' if project.visible }}> Visible on portfolio</label>
+  <div class="row"><button class="btn primary" type="submit">Save</button>
+  <a class="btn" href="{{ url_for('admin_dashboard') }}">Cancel</a></div>
+</form>
+{% endblock %}

@@ -1,0 +1,11 @@
+body.admin{padding-bottom:60px}
+.admin-bar{display:flex;justify-content:space-between;align-items:center;max-width:900px;margin:auto;padding:18px 24px;border-bottom:1px solid var(--line)}
+.admin-bar small{font-size:12px;color:var(--muted);letter-spacing:0;font-weight:400}.admin-bar>div{display:flex;gap:18px;align-items:center;color:var(--muted)}
+.admin-main{max-width:900px;margin:auto;padding:30px 24px}.admin-main h1{font-size:28px;margin:30px 0 16px;display:flex;gap:14px;align-items:center}
+.badge{font-size:12px;background:var(--panel);border:1px solid var(--line);padding:3px 10px;border-radius:20px;color:var(--accent2);font-weight:600}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px;margin-bottom:12px}.card.unread{border-left:3px solid var(--accent)}
+.card-head{display:flex;gap:14px;flex-wrap:wrap;align-items:baseline;margin-bottom:8px}.card-head small{color:var(--muted);margin-left:auto}.card-head a{color:var(--accent2)}
+.card p{color:#cfd3dc;white-space:pre-wrap;word-break:break-word}.row{display:flex;gap:10px;margin-top:14px}
+form.inline{display:inline}.btn.danger{color:#fca5a5}.link{background:none;border:0;color:var(--muted);cursor:pointer;font:inherit}.link:hover{color:white}
+.narrow{max-width:520px}.narrow label{display:grid;gap:6px;color:var(--muted);font-size:14px}.narrow .check{display:flex;align-items:center;gap:8px}.narrow .check input{width:auto}
+.admin-main h1 .btn{font-size:13px;padding:6px 14px;margin-left:auto}
