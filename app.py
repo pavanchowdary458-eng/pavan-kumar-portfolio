@@ -370,4 +370,16 @@ def notify_by_email(cfg, clean):
 app = create_app()
 
 if __name__ == "__main__":
-    app.run(debug=os.environ.get("FLASK_DEBUG", "1") == "1")
+    host = os.environ.get("HOST", "0.0.0.0")
+    port = int(os.environ.get("PORT", "5000"))
+    if os.environ.get("FLASK_DEBUG") == "1":
+        # Opt-in only: auto-reload + debugger for local development.
+        app.run(host="127.0.0.1", port=port, debug=True)
+    else:
+        # Production-grade WSGI server (works on Windows, macOS and Linux).
+        try:
+            from waitress import serve
+        except ImportError:
+            raise SystemExit("Install the production server first:  pip install -r requirements.txt")
+        print(f"Serving on http://{host}:{port}  (Ctrl+C to stop)")
+        serve(app, host=host, port=port, threads=4)

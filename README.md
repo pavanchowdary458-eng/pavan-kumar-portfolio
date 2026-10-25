@@ -20,6 +20,9 @@ export SECRET_KEY="a-long-random-string"
 export ADMIN_PASSWORD="choose-a-password"
 python app.py
 ```
+`python app.py` starts the production server (Waitress) on port 5000 — set `PORT` to change it.
+For local development with auto-reload, set `FLASK_DEBUG=1` first.
+
 Open http://127.0.0.1:5000 — admin at http://127.0.0.1:5000/admin
 
 See `.env.example` for all settings (database path, SMTP e-mail notifications).
@@ -31,7 +34,8 @@ python -m unittest discover -s tests -v
 
 ## Deploy
 ```bash
-gunicorn app:app
+gunicorn app:app        # Linux/macOS hosts (a Procfile is included)
+python app.py           # any OS, uses Waitress
 ```
 Set `SECRET_KEY`, `ADMIN_PASSWORD` and `FLASK_ENV=production` (secure cookies, requires HTTPS) in your host's environment. On hosts with an ephemeral disk (e.g. Render free tier) point `DATABASE_PATH` at a persistent volume, or the database resets on each deploy.
 
